@@ -2,6 +2,7 @@
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.Scanner;
 
 public class Main
@@ -17,6 +18,7 @@ public class Main
         String name;
         String definition;
         boolean distortionPresent;
+        PrintWriter outFile;
 
         try
         {
@@ -54,8 +56,30 @@ public class Main
         System.out.println("XXX?");
         checkResponse(cognitiveDistortions[1], keyboard);
 
+        System.out.println("Source: ");
+
+        try
+        {
+            outFile = new PrintWriter("cognitiveDistortionJournal.txt");
+            for(int i = 0; i < cognitiveDistortions.length; i++)
+            {
+                if(cognitiveDistortions[i].distortionPresent)
+                {
+                    outFile.printf(cognitiveDistortions[i].getName());
+                    //add solutions
+                }
+            }
+            outFile.close();
+        }
+        catch (FileNotFoundException ex)
+        {
+            System.out.println("Error creating file");
+        }
+
         keyboard.close();
     }
+
+
 
     static void checkResponse(CognitiveDistortion currentDistortion, Scanner keyboard)
     {
