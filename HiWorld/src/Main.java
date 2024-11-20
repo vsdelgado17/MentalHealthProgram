@@ -62,11 +62,11 @@ public class Main
         String response = "";
         response = keyboard.next();
         boolean invalidInput = true;
-        while(invalidInput == true)
+        while(invalidInput)
         {
-            if (response == "Yes" || response == "No")
+            if (response.equals("Yes") || response.equals("No"))
             {
-                if(response == "Yes")
+                if(response.equals("Yes"))
                 {
                     currentDistortion.setDistortionPresent(true);
                 }
