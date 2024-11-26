@@ -46,27 +46,25 @@ public class Main
 
         System.out.printf("%s%n%n","Mental Health Program - Identifying Cognitive Distortions");
         System.out.println("This program is meant to determine which, if any, cognitive distortions are present in your thinking.");
-        System.out.println("Cognitive distortions are xxx.");
-        System.out.printf("%n%s", "You will be asked a set of questions to help determine this.");
-        System.out.printf("%n%s%n%n", "Please respond with 'Yes' or 'No' to each question.");
+        System.out.println("Cognitive distortions are ways of thinking that lead us to have a negative view our life.");
+        System.out.printf("%n%s%n", "You will be asked a set of questions. Please respond with 'Yes' or 'No' to each question.");
 
-        System.out.println("XXX?");
-        checkResponse(cognitiveDistortions[0], keyboard);
+        for (int i = 0; i < 10; i++)
+        {
+            checkResponse(cognitiveDistortions[i], keyboard);
+        }
 
-        System.out.println("XXX?");
-        checkResponse(cognitiveDistortions[1], keyboard);
-
-        System.out.println("Source: ");
+        System.out.println("Thank you for completing this exercise. Please view the new text file created.");
+        System.out.println("Source: THE CBT WORKBOOK FOR MENTAL HEALTH");
 
         try
         {
             outFile = new PrintWriter("cognitiveDistortionJournal.txt");
-            for(int i = 0; i < cognitiveDistortions.length; i++)
+            for (int i = 0; i < cognitiveDistortions.length; i++)
             {
                 if(cognitiveDistortions[i].distortionPresent)
                 {
                     outFile.printf(cognitiveDistortions[i].getName());
-                    //add solutions
                 }
             }
             outFile.close();
