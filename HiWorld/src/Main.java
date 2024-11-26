@@ -23,7 +23,7 @@ public class Main
         try
         {
             Scanner myFile = new Scanner(new File("cognitiveDistortions.txt"));
-            myFile.useDelimiter(";|\r\n|\n");
+            myFile.useDelimiter(";");
             while(myFile.hasNext())
             {
                 if (cntr <= 10)
@@ -51,6 +51,7 @@ public class Main
 
         for (int i = 0; i < 10; i++)
         {
+            System.out.println(cognitiveDistortions[i].definition);
             checkResponse(cognitiveDistortions[i], keyboard);
         }
 
@@ -60,7 +61,7 @@ public class Main
         try
         {
             outFile = new PrintWriter("cognitiveDistortionJournal.txt");
-            for (int i = 0; i < cognitiveDistortions.length; i++)
+            for (int i = 0; i < 10; i++)
             {
                 if(cognitiveDistortions[i].distortionPresent)
                 {
