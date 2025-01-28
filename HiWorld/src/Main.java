@@ -11,7 +11,7 @@ public class Main
     {
         Scanner keyboard = new Scanner(System.in);
 
-        CognitiveDistortion cognitiveDistortions[] = new CognitiveDistortion [10];
+        CognitiveDistortion[] cognitiveDistortions = new CognitiveDistortion [10];
         int cntr = 1;
         int index = 0;
         int number;
@@ -24,17 +24,20 @@ public class Main
         {
             Scanner myFile = new Scanner(new File("cognitiveDistortions.txt"));
             myFile.useDelimiter(";");
-            while(myFile.hasNext())
+            while(myFile.hasNextLine())
             {
+                String line = myFile.nextLine();
+                String [] parts = line.split(";");
                 if (cntr <= 10)
                 {
                     number = cntr;
-                    name = myFile.next();
-                    definition = myFile.next();
+                    name = parts[0];
+                    definition = parts[1];
                     distortionPresent = false;
 
                     cognitiveDistortions[index] = new CognitiveDistortion(number, name, definition, distortionPresent);
                     cntr++;
+                    index++;
                 }
             }
             myFile.close();
@@ -42,6 +45,7 @@ public class Main
         catch(FileNotFoundException ex)
         {
             System.out.println("Error creating file.");
+            return;
         }
 
         System.out.printf("%s%n%n","Mental Health Program - Identifying Cognitive Distortions");
@@ -49,10 +53,9 @@ public class Main
         System.out.println("Cognitive distortions are ways of thinking that lead us to have a negative view our life.");
         System.out.printf("%n%s%n", "You will be asked a set of questions. Please respond with 'Yes' or 'No' to each question.");
 
-        for (int i = 0; i < 10; i++)
-        {
-            System.out.println(cognitiveDistortions[i].definition);
-            checkResponse(cognitiveDistortions[i], keyboard);
+        for (CognitiveDistortion cognitiveDistortion : cognitiveDistortions){
+                System.out.println(cognitiveDistortion.definition);
+                checkResponse(cognitiveDistortion, keyboard);
         }
 
         System.out.println("Thank you for completing this exercise. Please view the new text file created.");
@@ -61,11 +64,11 @@ public class Main
         try
         {
             outFile = new PrintWriter("cognitiveDistortionJournal.txt");
-            for (int i = 0; i < 10; i++)
+            for (CognitiveDistortion cognitiveDistortion: cognitiveDistortions)
             {
-                if(cognitiveDistortions[i].distortionPresent)
+                if(cognitiveDistortion.getDistortionPresent())
                 {
-                    outFile.printf(cognitiveDistortions[i].getName());
+                    outFile.printf(cognitiveDistortion.getName());
                 }
             }
             outFile.close();
@@ -82,8 +85,7 @@ public class Main
 
     static void checkResponse(CognitiveDistortion currentDistortion, Scanner keyboard)
     {
-        String response = "";
-        response = keyboard.next();
+        String response = keyboard.next();
         boolean invalidInput = true;
         while(invalidInput)
         {
