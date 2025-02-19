@@ -61,16 +61,35 @@ public class Main
         System.out.println("Thank you for completing this exercise. Please view the new text file created.");
         System.out.println("Source: THE CBT WORKBOOK FOR MENTAL HEALTH");
 
+        int numDistortions = 0;
+
         try
         {
             outFile = new PrintWriter("cognitiveDistortionJournal.txt");
+            outFile.printf("Cognitive Distortions Found:");
+            outFile.println();
             for (CognitiveDistortion cognitiveDistortion: cognitiveDistortions)
             {
                 if(cognitiveDistortion.getDistortionPresent())
                 {
-                    outFile.printf(cognitiveDistortion.getName());
+                    numDistortions += 1;
                 }
             }
+            if(numDistortions == 0)
+            {
+                outFile.printf("No cognitive distortions were identified, but feel free to return to work on the offered exercises.");
+            }
+            else{
+                for (CognitiveDistortion cognitiveDistortion: cognitiveDistortions)
+                {
+                    if(cognitiveDistortion.getDistortionPresent())
+                    {
+                        outFile.printf(cognitiveDistortion.getName());
+                        outFile.println();
+                    }
+                }
+            }
+            outFile.printf("Exercises to complete: ");
             outFile.close();
         }
         catch (FileNotFoundException ex)
