@@ -77,7 +77,7 @@ public class Main
             }
             if(numDistortions == 0)
             {
-                outFile.printf("No cognitive distortions were identified, but feel free to return to work on the offered exercises.");
+                outFile.printf("No cognitive distortions were identified, but feel free to work on any listed exercise.");
             }
             else{
                 for (CognitiveDistortion cognitiveDistortion: cognitiveDistortions)
@@ -89,15 +89,21 @@ public class Main
                     }
                 }
             }
-            outFile.printf("Exercises to complete: ");
-            outFile.close();
         }
         catch (FileNotFoundException ex)
         {
             System.out.println("Error creating file");
         }
-
         keyboard.close();
+
+        System.out.print("Select an exercise to learn more about: ");
+        // Add list of exercises, allow user to select
+        // when they select, they can choose to do it, which opens it in a text file
+        //outFile.printf("Exercise to complete: ");
+        //            outFile.close();
+        // else, they can go back into the the list and learn about the rest.
+        //They can select to exit
+        outFile.close();
     }
 
 
